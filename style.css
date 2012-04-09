@@ -1,0 +1,60 @@
+html, body { 
+	margin:0; 
+	padding:0; 
+	width: 100%;
+	height:100%;
+} 
+
+.container {
+	width: 100%;
+	height: 100%;
+	text-align: center;
+}
+
+.stone_container {
+	margin:0 auto;
+	margin-top:15px;
+	position:absolute;
+	height:500px;
+	width:500px;
+}
+
+.game_container {
+	margin:0 auto;
+	position:relative;
+	height:502px;
+	width:502px;
+	top:0px;
+	left:0px;
+}
+
+.countdown_container {
+	margin:0 auto;
+	font-size: 150px;
+	position:absolute;
+	height:520px;
+	width:502px;
+	top:0px;
+	left:0px;
+}
+
+.boggle_stone {
+	border: 1px solid #000000;
+	position:absolute;
+	text-align: center;
+	font-size: 50px;
+	font-family:courier;
+	
+	vertical-align: middle;
+	display:table-cell;
+	line-height: 125px;
+	display:none;
+	
+}
+
+.timer_container {
+margin-top:15px;
+	position:relative;
+	text-align: center;
+	font-size: 50px;
+}
