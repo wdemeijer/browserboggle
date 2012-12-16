@@ -15,13 +15,17 @@ BStone.prototype = {
 	},
 	show: function(element)  {
 		container_height = 500;
-		stone_size = container_height/4;
-		x_position = stone_size * this.location.x;
-		y_position = stone_size * this.location.y;
+		stone_size = container_height/4 - 5;
+		x_position = (stone_size + 5) * this.location.x;
+		y_position = (stone_size + 5) * this.location.y;
+        
+        
 		
 		var letter = this.sides[Math.floor(Math.random()*6)];
+        
+        var rotation = Math.floor((Math.random()*3)+0) * 90;
 		
-		html = "<div class='boggle_stone' id='"+this.location.x+"-"+this.location.y+"' style='top:"+y_position+"px;left:"+x_position+"px; width: "+stone_size+"px; height:"+stone_size+"px;display:block;'>"+letter+"</div>";
+		html = "<div class='boggle_stone' id='"+this.location.x+"-"+this.location.y+"' style='top:"+y_position+"px;left:"+x_position+"px; width: "+stone_size+"px; height:"+stone_size+"px;display:block;-webkit-transform:rotate("+rotation+"deg)'>"+letter+"</div>";
 		console.log("drawing:"+html+" on element:"+element);
 		$(element).append(html);
 	}
@@ -60,6 +64,7 @@ function BBoard(stonemanager, timer) {
 	this.stone_manager = stonemanager;
 	this.init();
 }
+
 BBoard.prototype = {
 	init: function() {
 		console.log("Board initialized.");

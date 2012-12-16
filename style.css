@@ -40,11 +40,11 @@ html, body {
 
 .boggle_stone {
 	border: 1px solid #000000;
+    border-radius: 10px;
 	position:absolute;
 	text-align: center;
-	font-size: 50px;
-	font-family:courier;
-	
+	font-size: 70px;
+	font-family: ‘Metrophobic’, Arial, serif;
 	vertical-align: middle;
 	display:table-cell;
 	line-height: 125px;
