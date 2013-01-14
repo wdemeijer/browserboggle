@@ -14,18 +14,16 @@ BStone.prototype = {
 		this.location = {x: x, y: y};
 	},
 	show: function(element)  {
-		container_height = 500;
-		stone_size = container_height/4 - 5;
-		x_position = (stone_size + 5) * this.location.x;
-		y_position = (stone_size + 5) * this.location.y;
-        
-        
+		var container_height = 500;
+	    var	stone_size = container_height/4 - 5;
+		var x_position = (stone_size + 5) * this.location.x;
+		var y_position = (stone_size + 5) * this.location.y;
 		
 		var letter = this.sides[Math.floor(Math.random()*6)];
         
-        var rotation = Math.floor((Math.random()*3)+0) * 90;
+        var rotation = Math.floor((Math.random()*3)+0) * 90 + (Math.floor((Math.random()*3)+0) - 1.5);
 		
-		html = "<div class='boggle_stone' id='"+this.location.x+"-"+this.location.y+"' style='top:"+y_position+"px;left:"+x_position+"px; width: "+stone_size+"px; height:"+stone_size+"px;display:block;-webkit-transform:rotate("+rotation+"deg)'>"+letter+"</div>";
+		var html = "<div class='boggle_stone' id='"+this.location.x+"-"+this.location.y+"' style='top:"+y_position+"px;left:"+x_position+"px; width: "+stone_size+"px; height:"+stone_size+"px;display:block;-webkit-transform:rotate("+rotation+"deg)'>"+letter+"</div>";
 		console.log("drawing:"+html+" on element:"+element);
 		$(element).append(html);
 	}
@@ -45,8 +43,8 @@ BStoneManager.prototype = {
 		var grid_width = 4;
 		var grid_height = 4;
 		var stone_number = 0 ;
-		for(x = 0; x<grid_width; x++) {
-			for(y = 0; y<grid_height; y++) {
+		for(var x = 0; x<grid_width; x++) {
+			for(var y = 0; y<grid_height; y++) {
 				this.stones[stone_number].set_location(x, y);
 				stone_number++;
 			}
@@ -97,8 +95,7 @@ BTimer.prototype = {
 		var self = this;
 		clearTimeout(this.timeout);
 		this.count_countdown();
-		$(this.countdown_container).css("background", "#FFFFFF");
-		$(this.countdown_container).css("opacity", "1");
+        $("#stone_container").css("opacity", "0");
 		$(this.countdown_container).css("display", "block");
 		$(this.countdown_container).mouseover(function() {});
 		$(this.countdown_container).mouseout(function() {});
@@ -124,7 +121,8 @@ BTimer.prototype = {
 		else {
 			console.log("animate");
 			$(this.countdown_container).css("display", "block");
-			$(this.countdown_container).animate({
+            $("#stone_container").css("opacity", "0");
+            $(this.countdown_container).animate({
 				opacity: 1,
 			  }, 250, function() {
 				// Animation complete.
@@ -132,10 +130,14 @@ BTimer.prototype = {
 			  self = this;
 			$(this.countdown_container).mouseover(function() { 
 				$(self.countdown_container).css("opacity", "0");
+                $("#stone_container").css("opacity", "1");
 			});
 			$(this.countdown_container).mouseout(function() { 
 				$(self.countdown_container).css("opacity", "1");
+                $("#stone_container").css("opacity", "0");
 			});
+            
+            
 			$(self.countdown_container).html("Stop writing!");
 			$(self.container).html("");
 			
@@ -155,6 +157,15 @@ BTimer.prototype = {
 				opacity: 0,
 			  }, 1000, function() {
 				$(self.countdown_container).css("display", "none");
+                
+                
+				// Animation complete.
+			  });
+              $("#stone_container").animate({
+    			opacity: 1,
+			  }, 1000, function() {
+                
+                
 				// Animation complete.
 			  });
 			this.time = this.start_time;
